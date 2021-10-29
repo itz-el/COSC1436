@@ -1,0 +1,193 @@
+* 2-1
+  The *waterfall method* is a method of software design consisting of:
+   - Customer Requests
+   - Analysis
+   - Design
+   - Implementation
+   - Integration
+   - Maintenence
+  
+  Modern software design is usually *incremental* and *iterative*
+  - This means that analysis and deisgn may produce a rough draft,
+    skeletal version, or prototype of a system for coding, and then
+    back up to earlier phases to fill in more details after testing.
+
+  Mistakes found early are much less expensive to correct than those
+  found late. Not just financially, but in time and effort.
+
+  /Maintenence/ is the most expensive part of software development.
+* 2-2 Strings, Assignment, and Comments
+  When we use data in a computer program, we need to keep in mind
+  the type of data we are using.
+  
+  In programming, a *data type* is set of values and operations on
+  those values. A *literal* is the way a value of a type of data looks
+  to a programmer.
+  Examples:
+  Type of Data | Python Type Name | Literals
+  - Integers 'int' "-1, 0, 1 ,2"
+  - Real Numbers 'float' "0.5, -0.2, 3.14, .333"
+  - Character Strings 'str' ""Hi", "", 'A', "66""
+
+  *int* and *float* are called *numerical data types*
+  In python, a string literal is a sequence of characters enclosed in
+  double or single quotation marks.
+  The literal "" represents an *empty string*
+  
+  To produce a multiline string, you can use """ to enclose a string
+  and python will evaluate your inserted line breaks as \n, a newline
+  character. 
+
+  The newline character \n is called an *escape sequence*,
+  which is the way python expresses special characters, such as tab,
+  the newline, and the backspace. 
+  Examples:
+  - \b    Backspace
+  - \n    Newline
+  - \t    Horizontal Tab
+  - \\    The \ Character
+  - \'    Single Quotation mark
+  - \"    Double Quotation Mark
+
+  You can join multiple strings together using the concatenation operator
+  +, and the * operator allows you to build a string by repeating another
+  string a given number of times.
+** Variables
+   A *variable* associates a name with a value, allowing for ease of use
+   later in the program. In general, variable names must begin with
+   either a letter or an underscore. They are also case sensitive.
+
+   Its common to begin each word in the variable name, sans the first, with
+   an uppercase letter, eg. "interestRate" rather than "interestrate" for
+   legibility. However, programmers use all uppercase letters for the name
+   of variables that contain constant values. Such variables are known as
+   *symbolic constants*.
+
+   Variables recieve their initial values and can be reset to new values using
+   an *assingment statement*. The simplest form is the following
+   <variable name> = <expression>
+   The Python interpreter first evaluates the expression on the right side, and
+   then binds the variable name on the left side to this value. The first time
+   this happens is called *defining* or *initializing* the variable. After that,
+    subsequent uses of said variable name are known as *variable references*
+
+    Variables serve two important purposes, they help the programmer keep track
+    of data, and refer to complex information with a simple name. Such a process
+    of simplification is called *abstraction* and is fundamental.
+** Comments
+   a comment is a piece of program text that the computer ignores but provides
+   useful documentation to programmers.
+   
+   a *docstring* is a comment included at the beginning of a program, and
+   typically includes a statement of the programs purpose, and information
+   about the author.
+
+   *end of line* comments begin with the # symbol and extend to the end of
+   a line. They might explain the purpose of a variable or the process
+   of a piece of code.
+* 2-3 Numeric Data Types and Character Sets
+  In this section, we give a brief overview of numeric data types and their
+  cousins, *character* sets.
+
+  *Integers* include 0, positive whole numbers, and negative whole numbers.
+  The magnitude of a python integer, *int*,  is only limited by the memory of
+  your computer.
+
+  *Floating Point Numbers* consists of a whole number, a decimal point, and
+  a fractional part. these Real numbers have *infinite precision*.
+  a floating-point numbeer can be written using ordinary decimal notation or
+  scientific notation, such as 37.8 or 3.78e1.
+
+** Character Sets
+   Characters in a string each map to an integer value.
+   This mapping is definied in character sets, among them the *ASCII set* and
+   the *Unicode set*. ASCII stands for American Standard Code for Information
+   Interchange.
+   Pythons *ord* and *chr* functions convert characters to their numeric ASCII
+   coedes and back again, respectively.
+* 2-4 Expressions
+  *Expressions* provide an easy way to perform operations on data values
+  to produce other data values.
+
+  | Operator | Meaning              | Syntax |
+  | -        | Negation             | -a     |
+  | **       | Exponentiation       | a ** b |
+  | *        | multiplication       | a * b  |
+  | /        | Division             | a / b  |
+  | //       | Quotient             | a // b |
+  | %        | Remainder or modulus | a %  b |
+  | +        | Addition             | a + b  |
+  | -        | Subtraction          | a - b  |
+
+  The *precidence rules* you learned in algebra appy during the
+  evaluation of arithmetic expressions in Python:
+  - Exponentiation
+  - Unary Negation
+  - Multiplication, Both Divisions, and Remainder
+  - Addition and Subtractions
+  Operations of equal precenence are left associative, while
+  exponentiation and assignment operations are right associative
+
+  *semantics* are the rules for interpriting the meaning of a program
+  in a language. a *semantic error* is detected with the action that
+  an expression describes cannot be carried out, even if its syntactically
+  correct.
+
+  Except division, when both operants of an arithmetic expression are of
+  the same type, the resulting value is also of that type. When each operand
+  is of a different type, the resulting value is of the more general type.
+
+  Performing calculations involving both integers and floating point numbers is
+  called *mixed-mode arithmetic*.
+
+  You must use a *type conversion function* when working with the input of
+  numbers. A type conversion function is a function with the same name as the
+  data type to which it converts. *input* returns a *string*, to convert a
+  string of numbers to an int, use int(input()) or float(input()).
+
+  int converts a float to int by truncation, not by rounding to the nearest
+  whole number. the *round* function rounds a float to an int when not passed
+  a second argument.
+
+  Python is a *strongly typed programming language*, meaning the types of
+  operands are checked prior to applying an operator to them.
+* 2-5 Using Functions and Modules
+  Python includes many useful functions, which are organized in libraries of
+  code called *modules*.
+
+  A *function* is a chunk of code that can be called by name to perform a task.
+  Functions often require arguments, that is, specific data values, to perform
+  their tasks. Names that refer to arguments are also called *parameters*.
+
+  When a function completes its task, it may send back a result back to the
+  part of a program that called the function. This process of sending the
+  result back is called *returning a value*.
+
+  Some functions have *optional arguments* some have *required arguments*.
+  Round has one required argument and one optional argument, and exhibits
+  a *default behavior* when called without the second. That default behavior
+  is to return the nearest whole number passed into it.
+
+** The math Module
+   functions arnd other resources are coded in components called *modules*
+   Functions like *abs* and *round* from the __builtin__ module are always
+   available for use, whereas the programmer mus import other functions from
+   modules where they are defined.
+
+   The *math* module includes several functions that perform basic mathematical
+   operations.
+   <import math> imports the math module
+   <dir(math)> lists a directory of its resources
+
+   to use a resource from a module you write the name of it as a qualifier,
+   followed by a dot, such as math.pi.
+
+
+   entering help(math) browses through the modules documentation.
+
+   the statement <from math import *> would import all the modules resources,
+   while <from math import pi, sqrt> would only import pi and the square root
+   function.
+
+   a *main module* is a python module containing code that serves as the
+   starting point of program execution.

@@ -1,0 +1,190 @@
+* 3-1 Definitive Iteration
+** The for Loop
+  We begin our study of control statements with repetition statements,
+  also known as *loops*, which repeat an action. Each reptitition of
+  the action is known as a *pass* or *iteration*. The two types of loops
+  are those that _repeat an action a predefined number of times_, known
+  as *definitive iteration*, and those that _perform an action until the_
+  _program determines that it should stop_, known as *indefinite iteration*.
+
+  The *for loop*, a definitive iteration, is constructed this way:
+  
+  for <variable> in range(<an integer expression>):
+      <statement>
+      ...
+      <statement>
+
+  The first line of code in a loop is sometimes called the *loop header*.
+  The colon ends the loop header. The *loop body* compromises the statements
+  in the remaining lines of code below the header. Note that the statements
+  in the loop body /must be indented and aligned in the same column/.
+
+  Python executes the for loop from 0 to <integer expression> minus one.
+  *count-controlled loop* is another name for a loop that counts through
+  a range of numbers.
+
+  To count from an explicit lower bound, a second integer can be supplied
+  in the loop header. When two arguments are supplied to range(), the
+  count ranges from the first argument to the second argument minus one.
+
+  for <variable> in range(<lower bound>, <upper bound + 1>):
+      <loop body>
+
+  Acummulating a single result value from a series of values from a lower
+  bound through an upper bound is called *summation*.
+  
+** Augmented Assignment
+   Common expressions such as x = x + 1 or x = x * 2 occur so frequently
+   in loops that python has abbreviated forms of them. The assignment
+   symbol can be combined with the arithmetic and concatenation operators
+   to provide *augmented assignment operators*. Examples:
+   | Operator   | Equivalent    |
+   | a += 3     | a = a + 3     |
+   | a -= 3     | a = a - 3     |
+   | a *= 3     | a = a * 3     |
+   | a /= 3     | a = a / 3     |
+   | a %= 3     | a = a % 3     |
+   | s += 'str' | s = s + 'str' |
+
+   All of these examples have the format:
+   <variable> <operator>= <expression>
+   which equates to
+   <variable> = <variable> <operator> <expression>
+
+** Loop Errors: Off-by-One Eror
+   When using a for loop, the one error one must be concerned about aside
+   from syntax is: The loop fails to perform the expected number amount
+   of iterations. Because this number is typically off by one, the error
+   is called an *off-by-one error*. They typically occur when the progra-
+   mmer incorrectly specifies the upper bound of the loop. This error,
+   known as a *logic error*, are not detected by the interpreter.
+   Error Example for a "Count from 1 through 4" program
+   >>> for count in range(1,4):
+           print(count)
+       1
+       2
+       3
+  What has happened here is that the programmer has used 4 to represent
+  an upper bound of 4 counts, when the proper number would be 5, as the
+  loop iterates to upper - 1.
+  
+** Traversing the Contents of a Data Sequence
+   In python, a *list* is defined as a sequence of items ordered by
+   position. The variables in a list, or in any sequence, can be visited
+   by running a for loop, as follows:
+   
+   for <variable> in <sequence>:
+       <do something with variable>
+
+   On each pass through the loop, the variable is bound to or assigned
+   the next value in the sequence, starting with the first one and ending
+   with the last one. The following code traverses all elements in two
+   sequences and prints the values contained by them, seperated by spaces
+
+   >>> for number in [6, 4, 8]:
+           print(number, end = " ")
+       6 4 8
+   >>> for character in "Hi there!":
+           print(character, end = " ")
+       H i  t h e r e !
+
+** Specifying the Steps in the Range
+   Just as a second argument was passed to the *range* function in a for
+   loop, a third argument can be passed as well. This third argument
+   specifies a *step value* or the interval between the numbers used as
+   the range.
+   Examples:
+   >>> list(range(1, 6, 1)) # Same as two arguments
+       [1, 2, 3, 4, 5]
+   >>> list(range(1, 6, 2)) # Use every other number
+       [1, 3, 5]
+   >>> list(range(1, 6, 3)) # Use every third number
+       [1, 4]
+
+   Generally this can be described as range(x, y, z), where x is the
+   lower limit, y - 1 is the upper limit, and z is the interval between
+   terms.
+   
+** Loops That Count Down
+   When a problem calls for counting in the opposite direction, from the
+   upper bound to the lower bound, the range function's third argument
+   can be -1.
+   >>> for count in range(10, 0, -1):
+           print(count, end = " ")
+       10 9 8 7 6 5 4 3 2 1
+   >>> list(range(10, 0, -1))
+       [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+   When the step argument is a negative number, the range function
+   generates a sequence of numbers from the first argument down to the
+   second argument plus 1. Thus, in this case, the first argument should
+   represent the upper bound, and the second argument should be represent
+   the lower bound.
+
+   
+* 3-2 Formatting Text for Output
+** Formating Basics 
+  We need to examine more closely the format of text for output.
+  Many data-processing applications require output that has a
+  *tabular format*, like that used in spreadsheets or tables of
+  numeric data. In this format, numbers and other information are
+  aligned in columns that can be either left-justified or righ-justified.
+  A column of data is left-justified if its values are vertically aligned
+  beginning with their leftmost character. A column of data is right
+  justified if its values are vertically aligned beginning with their
+  rightmost characters.
+
+  The total number of data characters and additional spaces for a given
+  datum in a formatted string is called its *field width*.
+
+  The print function automatically begins printing an output datum in the
+  first available column.
+
+** Python Formatting Mechanisms
+   Python includes a general formatting mechanismm that allows the author
+   to specify field widths for different types of data.
+
+   The simplest form of this is the following:
+   <format string> % <datum>
+
+   This version contains a *format string*, the *format operator %*, and
+   a single data value to be formatted. To format a string to be right or
+   left justified, the notation _"%<field width>s"_ is used. When the field
+   width is positive, the datum is right-justified; and when its negative
+   it is left-justified. If the field width is less than or equal to the
+   datums print length in characters, no justification is added. The %
+   operator works with this information to return a formatted string.
+   Example:
+
+   >>> "%6s" % "four"     # Right justify
+       '  four'
+   >>> "%-6s" % "four"    # Left justify
+       'four  '
+
+   To format integers, rather than s for string, you use the letter d.
+   To format a sequence of data vlaues, you construct a format string
+   that includes a format code for each datum and p'lace the data values
+   in a tuple following the % operator.
+
+   The form of this is:
+   <format string> % (<datum-1>, ..., <datum-n)
+
+   Using the format operation, a for loop can display justified outputs:
+
+   >>> for exponent in range(7, 77)
+           print("%-3d%12d" % (exponent, 10 ** exponent))
+       7      100000000
+       8     1000000000
+       9    10000000000
+       10  100000000000
+
+   In this example, %-3d formats the first argument to the left, and
+   $12d formats the second argument to the right, with field widths of
+   3 and 12 respectively.
+
+   The format information for a data value of type float has the form:
+   %<field width>.<precision>f
+
+   where .<precision> is optional. This operator can be used to force an
+   amount of digits to be displayed after a decimal place, even if the
+   value is a whole number.

@@ -1,0 +1,716 @@
+*  5-1 Lists
+** Intro
+   A list is a sequence of data values called *items* or
+   *elements*. Here is a list of real-world examples of
+   lists:
+   - A shopping list for the grocery store
+   - A To-Do list
+   - A roster for an athletic team
+   - A guest list for a wedding
+   - A recipe
+   - A text document, which is a list of lines
+   - A phone book
+
+   The logical structure of a list resembles the structure
+   of a string. Each of the items in a list is ordered by
+   position. Like a character in a string, each item in a
+   list has a unique index that specifies its position.
+   The index of the first item is 0, and the index of the
+   last item is the length of the list minus 1. Lists and
+   Strings share many of the same operators, but include
+   different sets of methods.
+** List Literals and Baisc Operators
+   Literal string values are written as sequences of chara-
+   cters enclosed in quote marks. In Python a list literal
+   is written as a sequence of deta values seperated by
+   commas, and enclosed in square brackets.
+
+   Examples:
+   [1951, 1969, 1984]                  # A list of integers
+   ["apples", "oranges", "cherries"]   # A list of strings
+   []                                  # An empty list
+
+   You can also use other lists as elements in a list,
+   thereby creating a list of lists. Here is one example
+   of such a list:
+
+   [[5, 9], [541, 78 ]]
+
+   When the Python interpreter evaluates a list literal,
+   each of the elements is evaluated as well. When an
+   element is a number or a string, that literal is inc-
+   lutded in the resulting list. However, when the element
+   is a variable or any other expression, its value is
+   included in the list, as shown in the following session.
+
+   >>> import math
+   >>> x = 2
+   >>> [x, math.sqrt(x)]
+   [2, 1.4142135623730941]
+   >>> [x + 1]
+   [3]
+
+   Thus, you can think of the [] delimiters as a function
+   which evaluates its arguments before returning their
+   values.
+*** The range And list Functions
+    You can also build lists of integers using the range
+    and list functions. The next session shows the con-
+    struction of two lists and their assignment:
+
+    >>> first = [1, 2, 3, 4]
+    >>> second = list(range(1,5))
+    >>> first
+    [1, 2, 3, 4]
+    >>> second
+    [1, 2, 3, 4]
+
+    The list function can build a list from any iterable
+    sequence of elements, such as a string:
+
+    >>> third = list("Hello")
+    >>> third
+    ['H', 'e', 'l', 'l', 'o']
+
+    The function len and the subscript operator [] work
+    just as they do for strings:
+
+    >>> len(first)
+    4
+    >>> first[0]
+    1
+    >>> first[2:4]
+    [3, 4]
+
+    Concatenation (+) and Equality (==) also work the same:
+
+    >>> first + [5, 6]
+    >>> first == second
+    True
+
+    The print function strips the quotation marks from a
+    string, but does not alter the list format:
+
+    >>> print("1234")
+    1234
+    >>> print([1, 2, 3, 4])
+    [1, 2, 3, 4]
+
+    To print the contents of a list without the brackets
+    and commas, you can use a for loop:
+
+    >>> for number in [1, 2, 3, 4]:
+            print(number, end = " ")
+    1 2 3 4
+
+    Finally, you can use the in operator to detect the
+    presence or absence of a given element
+
+    >>> 3 in [1, 2, 3, 4]
+    True
+    >>> 0 in [1, 2, 3, 4]
+    False
+** Replacing an Element in a List
+   Although Lists and Strings behave similarly, there is
+   one major difference. A string is immutable--its
+   structure and contents cannot bechanged, while a list
+   is mutable--elements can be inserted, removed, or
+   replaced. The list itself maintains its identity, but
+   its state--its length and its contents--can change.
+
+   The subscript operator is used to replace an element
+   at a given position, as shown in the next session:
+
+   >>> example = [1, 2, 3, 4]
+   >>> example
+   [1, 2, 3, 4]
+   >>> example[3] = 0
+   >>> example
+   [1, 2, 3, 0]
+
+   The subscript operation refers to the target of the
+   assigment statement, which is not the list but an
+   elements position within it. Much of list processing
+   involves replacing each element with the result of
+   applying some operation to that element. Here are two
+   examples of how this is done:
+
+   >>> numbers = [2, 3, 4, 5]
+   >>> numbers
+   [2, 3, 4, 5]
+   >>> for index in range(len(numbers)):
+           numbers[index] = numbers[index] ** 2
+   >>> numbers
+   [4, 9, 16, 25]
+
+   Note that the code uses a for loop over an index rather
+   than a for loop over the list elements, as the index is
+   needed to access the positions for the replacements.
+   The next session uses the string method split to extract
+   a list of words in a sentence. These words are then con-
+   verted to uppercase letters within the list:
+
+   >>> sentence "This example has five words."
+   >>> words = sentence.split()
+   >>> words
+   ['This', 'example', 'has', 'five', 'words.']
+   >>> for index in range(len(words)):
+           words[index] = words[index].upper()
+   >>> words
+   ['THIS', 'EXAMPLE', 'HAS', 'FIVE', 'WORDS.']
+** List Methods for Inserting and Removing Elements
+   The list type includes several methods for inserting and
+   removing elements. They are summarized in the table be-
+   low, where L refers to a list. To learn more about each
+   method, enter *help(list.<method name>)* in a Python
+   shell.
+
+   | *List Method*     | *What It Does*                   |
+   |-------------------+----------------------------------|
+   |-------------------+----------------------------------|
+   | L.append(element) | Adds element to the end of L     |
+   |-------------------+----------------------------------|
+   | L.extend(aList)   | Adds the elements of aList to    |
+   |                   | the end of L                     |
+   |-------------------+----------------------------------|
+   | L.insert(index,   | Inserts element at index if      |
+   | element)          | index is less than the length of |
+   |                   | L. Otherwise, inserts element at |
+   |                   | the end of L.                    |
+   |-------------------+----------------------------------|
+   | L.pop(idex)       | Removes and returns the element  |
+   |                   | at index, or len(L)-1 without a  |
+   |                   | specified index.                 |
+   |-------------------+----------------------------------|
+   | L.pop(index)      | Removes and returns the element  |
+   |                   | at index                         |
+   |-------------------+----------------------------------|
+
+***  Methods
+   The method *insert* expects an integer index and the new
+   element as arguments. When the index is less than the
+   length of the list, insert places the new element before
+   the existing element at said index, after shifting
+   elements to the right by one. Think of it as pushing
+   everything to the right to make room for a new element.
+
+   >>> example = [1, 2]
+   >>> example
+   [1, 2]
+   >>> example.insert(1, 10)    # insert 10 at index 1
+   >>> example
+   [1, 10, 2]
+   >>> example.insert(3, 25)    # insert 25 at index 3
+   >>> example
+   [1, 10, 2, 25]
+
+   The method *append* is a simplified version of *insert*.
+   The method *append* expects just the new element as an
+   argument and adds the new element to the end of the
+   list. The method *extend* performs a similar operation,
+   but adds the elements of a supplied list arguement to
+   the end of the referenced list. The next session shows
+   the differences between append, extend, and the + op.
+
+   >>> example = [1, 2]
+   >>> example.append(3)
+   >>> example
+   [1, 2, 3]
+   >>> example.extend(['a', 'b', 'c'])
+   [1, 2, 3, 'a', 'b', 'c']
+   >>> example + ['!', '?']
+   [1, 2, 3, 'a', 'b', 'c', '!', '?']
+
+   The method *pop* is used to return and remove an element
+   at a given position. If a position is not specified, pop
+   defaults to the last element. When pop is used, elements
+   that followed the removed element are shifted one pos-
+   ition to the left.
+
+   >>> example
+   [1, 2, 3, 'a', 'b', 'c']
+   >>> example.pop()          # Remove the last element
+   'c'
+   >>> example
+   [1, 2, 3, 'a', 'b']
+   >>> example.pop(0)         # Remove the first element
+   1
+   >>> example
+   [2, 3, 'a', 'b']
+** Searching and Sorting a List
+*** Searching
+    After elements have been added to a list, a program
+    can search for a given element. The *in* operator
+    determines an elements presence or absence, but
+    does not specify its position. Unlike strings, the
+    find method does not work on the list type. Instead of
+    find, you must use the method *index* to locate an
+    elements position in a list. Index raises an exception
+    when the target element is not found. To avoid this,
+    use an *in* if statement before indexing if True.
+
+    aList = [34, 45, 67]
+    target = 45
+    if target in aList:
+        print(aList.index(target))
+    else:
+    print(-1)
+*** Sorting a List
+    Although a list's elements are always ordered by pos-
+    ition, it is possible to impose a *natural ordering*
+    -- the placement of data items relative to each other
+    by some internal criteria, such as numeric value or
+    alphabetical value. -- on them aswell. The list method
+    *sort* mutates a list by arranging its elements in
+    ascending order.
+
+    >>> example = [4, 2, 10, 8]
+    >>> example.sort()
+    >>> example
+    [2, 4, 8 , 10]
+** Mutator Methods and the Value None
+   Mutable objects (such as lists) have some methods
+   devoted entirely to modifying the internal state of
+   the object. Such methods are called *mutators*. Because
+   a change of state is all that is desired, a mutator
+   method usually returns no value of interest to the
+   caller. Python nevertheless automatically returns the
+   special value None even when a method does not explicit-
+   itly return a value.
+
+   Suppose you assume that sort builds and returns a new,
+   sorted list, leaving the original list unsorted. Follow-
+   ing this assumption, code like this would make sense:
+
+   >>> aList = aList.sort()
+
+   Unfortunately, after the list object is sorted, this
+   assignment has the result of setting the variable
+   aList to the value None. The next print statement shows
+   that the reference to the list object is lost:
+
+   >>> print(aList)
+   None
+** Aliasing and Side Effects
+   Because lists are mutable, you can replace, insert, or
+   remove elements. The mutable property of lists leads to
+   some interesting phenomena, as shown here:
+
+   >>> first = [10, 20, 30]
+   >>> second = first
+   >>> first, second
+   ([10, 20, 30], [10, 20, 30])
+   >>> first[1] = 99
+   >>> first, second
+   ([10, 99, 30], [10, 99, 30])
+
+   In this example, a single list object is created and
+   modified using the subscript operator. When the index
+   [1] of the list *first* is replaced, the same index of
+   the list *second* is replaced also. This type of change
+   is known as a *side effect* — a change in a variable that
+   is the result of some action taken in a program, usually
+   from within a method. This happens because after the
+   assigment second = first, the variables first and second
+   refer to the same list object. They are *aliases* — name
+   that refers to the same memory location as another name.
+
+   If the data are immutable strings, aliasing can save on
+   memory. But as you might imagine, aliasing is not always
+   a good thing when side effects are possible. Assigment
+   creates an alias to the same object rather than a refe-
+   rence to a copy of the object. To prevent aliasing, you
+   can create a new object and copy the contents of the
+   original to it, as shown here:
+
+   >>> third = []
+   >>> for element in first:
+           third.append(element)
+   >>> first, third
+   ([10, 99, 30], [10, 99, 30])
+   >>> first[1] = 100
+   >>> first, third
+   ([10, 100, 30], [10, 99, 30])
+
+   The variables first and third refer to two different list
+   objects, although their contents are initially the same,
+   they are not one list with multiple references.
+
+   A simpler way to copy a list is to pass the source to a
+   call of the list function, as follows:
+
+   >>> third = list(first)
+** Equality: Object Identity and Structural Equivalence
+   When attempting to determine whether one variable is an
+   alias for another, the == operator can be used. It returns
+   True if the variables are aliases for the same object.
+   Unfortunately, == also returns True if the contents of two
+   /different/ objects are the same.
+
+   The first relation is called *object identity* —property of
+   an object that makes it possible for it to be the same at
+   different points in time, even though the values of its
+   attributes might change.
+   The second is *structural equivalence* — a criterion of
+   equality between two distinct objects in which one or more
+   of their attributes are equal.
+
+   Pythons is operator can be used to test for object identity,
+   it returns True if two operands refer to the exact same
+   object, or False if the operands are distinct objects.
+
+   >>> first = [1, 2, 3]
+   >>> second = first
+   >>> third = list(first)
+   >>> first == second
+   True
+   >>> first == third
+   True
+   >>> first is second
+   True
+   >>> first is third
+   False
+** Tuples
+   A *tuple* is a type of sequence that resembles a list,
+   except that, unlike a list, a tuple is immutable. You
+   indicate a tuple literal in Python by enclosing its
+   elements in parenthesis instead of square brackets.
+
+   >>> fruits ("apple", "banana")
+   >>> fruits
+   ('apple', 'banana')
+   >>> meats = ("fish", "poultry")
+   >>> food = meats + fruits
+   >>> food
+   ('fish', 'poultry', 'apple', 'banana')
+   >>> veggies = ["celery", "beans"]
+   >>> tuple(veggies)
+   ('celery', 'beans')
+
+   Most operators and functions that are used with lists also
+   apply to tuples. For the most part, if you foresee a list
+   whose structure will not change, you can and should use a
+   tuple instead.
+
+   When using a tuple of one element, you place a comma after
+   the expression within the parenthesis.
+
+   >>> badSingleton = (3)
+   >>> badSingleton
+   3
+   >>> goodSingleton = (3,)
+   >>> goodSingleton
+   (3,)
+*  5-2 Defining Simple Functions
+   Some scripts may be useful enough to package as functions
+   to use in other scripts. Defining our own functions
+   allows us to organize our code in existing scripts more
+   effectively.
+** The Syntax of Simple Function Definitions
+   Most of the functions used thus far expect at least one
+   argument, and also return a value. Let's define a func-
+   tion that expects a number as an argument and returns
+   the square of that number.
+
+   First, we consider how the function will be used. Its
+   name is *square*, so you can call it like this
+
+   >>> square(2)
+   4
+   >>> square(6)
+   36
+
+   The definition of this function consists of a *header*
+   and a *body*.
+
+   def square(x):
+       """Returns the square of argument x."""
+       return x * x
+
+   The header includes the keyword def as well as the func-
+   tion name and a list of parameters. The functions body
+   contains one or more statement. Here is the syntax:
+
+   def <function name>(<parameter-1>, ..., <parameter-n>):
+       <body>
+
+   The functions body contains the statements that execute
+   when the function is called. Our function contains a
+   single *return* statement which simply returns the result
+   of multiplying the given argument by itself. Note that
+   the argument name, also called a parameter, behaves like
+   a variable local to the function. This variable does not
+   recieve an initial value until the function is called.
+
+   Our function also contains a docstring. The String con-
+   tains information about what the function does. It is
+   displayed when a user enters help(function-name).
+** Parameters and Arguments
+   A *parameter* is the name used in the function definition
+   for an argument that is passed to the function when it is
+   called. The number and positions of the arguments of a
+   function call should match the number and positions of
+   the parameters in that functions definition. Some func-
+   tions expect no arguments, so t hey are defined with no
+   parameters.
+** The return Statement
+   A return statement is used at each exit point of a funct-
+   ion when that function should explicitly return a value.
+   The syntax of the return function for these cases is
+   the following:
+
+   return <expression>
+
+   Upon encountering a return statement, Python evaluates
+   the expression and immediately transfers control back
+   to the caller of the function. The value of the expre-
+   ssion is also sent back to the caller. If a function
+   contains no return statement, Python transfers control
+   to the caller after the last statement in the functions
+   body is executed, and the special value None is auto-
+   matically returned.
+** Boolean Functions
+   A *Boolean function* — function, also called a predicate,
+   that returns the Boolean value true or false.— usually
+   tests its argument for the presence of absense of some
+   property. The function returns True if the property is
+   present, or False otherwise.
+
+   The next example shows the use and definition of the
+   Boolean function odd, which tests a number to see whether
+   it is odd.
+
+   >>> odd(5)
+   True
+   >>> odd(6)
+   False
+
+   def odd(x):
+       """Returns true if x is odd or False otherwise."""
+       if x % 2 == 1:
+           return True
+       else:
+           return False
+** Defining A main Function
+   In scripts that include the definitions of several co-
+   operating functions, it is often useful to define a
+   special function named *main* that serves as the entry
+   point for the script. This function usually expects no
+   arguments and returns no value. Its purpose might be to
+   take inputs, process them by calling other functions, and
+   print the results.
+
+   The definition of the main function and the other func-
+   tion definitions need appear in no particular order in
+   the script, as long as the *main* is called at the very
+   end of the script.
+
+   When the following script is imported as a module, the
+   value of the module variable __name__ will be the name
+   of the module, "computeSquare". In that case, the main
+   function is not called, but the script's functions become
+   available to be called by other code. When the script is
+   launched from IDLE or a terminal prompt, the value of the
+   module variable __name__ will be ""__main__"". In that
+   case, the main function is called.
+
+*** Example
+   This example shows a complete script thats organized
+   in the manner just described. The main function prompts
+   the user for a number, calls the square function, and
+   prints the result. You can define main and the square
+   functions in any order.
+
+   When Python loads this module,
+   the code for both function definitions is loaded and
+   compiled, but not executed. Because main is called
+   within an if statement, this has the effect of trans-
+   ferring control to the first instruction in the main
+   functions definition. When square is called from main,
+   control is transfered from main to the first instruction
+   in square, then back to main after the last instruction
+   in square.
+
+   #+BEGIN_SRC python :var number=4 :results output
+	 def main():
+		 """The main function for this script"""
+		 result = square(number)
+		 print("The square of", number, "is", result)
+
+	 def square(x):
+		 """Returns the square of x."""
+		 return x * x
+
+	 if __name__ == "__main__":
+		 main()
+   #+END_SRC
+
+   #+RESULTS:
+   : The square of 4 is 16
+*  5-3 Dictionaries
+** Intro
+   Lists organize their elements by position. This mode of
+   organization is useful when you want to locate the first
+   element, or visit each element in a sequence. However, in
+   some situations, the position of a datum in a structure is
+   irrelevant; we're interested in its association with some
+   other element in the structure.
+
+   A dictionary organizes information by *association*, not po-
+   sition. This type of organization consists of a key, and a
+   value. For example, the word "mammal" in a dictionary being
+   under the letter "M".
+
+   In computer science, data structures oraganized by associ-
+   ation  are also called *tables*, or *association lists*. In
+   Python, a *dictionary* associates a set of *keys* with
+   *values*.
+** Dictionary Literals
+   A Python dictionary is written as a sequence of key/value
+   pairs seperated by commas. These pairs are sometimes called
+   *entries*. The entire sequence of entries is enclosed in
+   curly braces. A colon seperates a key and its value.
+
+   You can even create an empty dictionary—that is, a diction-
+   ary that contains no entries. You would create an empty
+   dictionary in a program that builds a dictionary from
+   scratch.
+
+   The keys in a dictionary can be data of any immutable types,
+   including tuples, although keys normally are strings or
+   integers. The associated values can be of any types.
+   Although entries may appear to be ordered in a dictionary,
+   this ordering is not significant.
+
+   The data associated with a key is accessed by providing it
+   as an argument to the dictionary name in square brackets.
+
+
+   #+BEGIN_SRC python
+	 birthdays = {"Itzi":"September 9", "Naomi":"December 15"}
+	 ages = dict()
+     ages['Itzi'] = 21
+	 return birthdays['Itzi'], ages['Itzi']
+   #+END_SRC
+
+   #+RESULTS:
+   | September 9 | 21 |
+** Adding Keys and Replacing values
+   You add a new key/value pair to a dictionary by using the
+   subscript operator []. The form of this operation is the
+   following:
+
+   <a dictionary>[<a key>] = <a value>
+
+   This code creates an empty dictionary and adds two new
+   entries:
+
+   #+begin_src python :session info :results output
+	 info = {}
+	 info["name"] = "Sandy"
+	 info["occupation"] = "Hacker"
+	 print(info)
+   #+end_src
+
+   #+RESULTS:
+   : {'name': 'Sandy', 'occupation': 'Hacker'}
+** Accessing Values
+   You can also use the subscript to obtain the value associat-
+   ed with a key. However, if the key is not present in the
+   dictionary, python raises an exception. Here are some exam-
+   ples, using the info dictionary, which we set up earlier.
+
+   If the existence of a key is uncertain, one can test for it
+   using the operator in. A far easier strategy is to use the
+   method *get*. This method expects two arguments, a possible
+   key and a default value. If the key is in the dictionary,
+   the associated value is returned. If the key is absent, the
+   default value passed to get is returned.
+
+   #+begin_src python :session info :results output
+	 print(info.get("job", None))
+   #+end_src
+
+   #+RESULTS:
+   : None
+** Removing Keys
+   To delete an entry from a dictionary, one removes its key
+   using the method pop. Pop expects a key, and an optional
+   value as its argument. If the key is in the dictionary, it
+   is removed, and its associated value is returned. Otherwise
+   the default value is returned. If pop is used with just one
+   argument, and the supplied key is absent, Python raises
+   an exception. The next session attempts to remove two keys
+   and print the values returned.
+
+	#+begin_src python :session info :results output
+	print(info.pop("job", None), info.pop("occupation"), info)
+	#+end_src
+
+	#+RESULTS:
+	: None Hacker {'name': 'Sandy'}
+** Traversing a Dictionary
+   When a for loop is used with a dictionary, the loop's varia-
+   ble is bound to each key in an unspecified order. The next
+   code segment preints all of the keys and their values in our
+   info dictionary:
+
+   #+begin_src python :session info :results output
+	 for key in info:
+         print(key, info[key])
+   #+end_src
+
+   #+RESULTS:
+   : name Sandy
+   : occupation Hacker
+
+   Alternatively, you could use the dictionary method items()
+   to access the dictionaries entries:
+
+   #+begin_src python :session grades :results output
+	 grades = {90:'A', 80:'B', 70:'C'}
+	 print(list(grades.items()))
+   #+end_src
+
+   #+RESULTS:
+   : [(90, 'A'), (80, 'B'), (70, 'C')]
+
+   Note that entries are represented as tuples within the list.
+   A tuple of variables can then access the key and value of
+   each entry in this list within a for loop:
+
+   #+begin_src python :session grades :results output
+	 for (key, value) in grades.items():
+		 print(key, value)
+   #+end_src
+
+   #+RESULTS:
+   : 90 A
+   : 80 B
+   : 70 C
+
+   Using of a tuple of variables rather than a simple variable
+   in the for loop is a powerful way to implement this
+   traversal. On each pass through the loop, the variables key
+   and value within the tuple are assigned the key and value
+   of the current entry in the list.
+
+   The use of a structure
+   containing variables to access data within another structure
+   is called *pattern matching*
+
+   If special ordering of the keys is needed, you can obtain a
+   list of keys using the keys method and process this list to
+   rearrange the keys. For example, you can sort the list and
+   then traverse it to print the entries of the
+
+   #+begin_src python :session info :results output
+	 theKeys = list(info.keys())
+	 theKeys.sort()
+	 for key in theKeys:
+         print(key, info[key])
+   #+end_src
+
+   #+RESULTS:
+   : name Sandy
+   : occupation Hacker

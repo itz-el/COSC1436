@@ -1,0 +1,403 @@
+*  5-1 Lists
+** Intro
+   A list is a sequence of data values called *items* or
+   *elements*. Here is a list of real-world examples of
+   lists:
+   - A shopping list for the grocery store
+   - A To-Do list
+   - A roster for an athletic team
+   - A guest list for a wedding
+   - A recipe
+   - A text document, which is a list of lines
+   - A phone book
+
+   The logical structure of a list resembles the structure
+   of a string. Each of the items in a list is ordered by
+   position. Like a character in a string, each item in a
+   list has a unique index that specifies its position.
+   The index of the first item is 0, and the index of the
+   last item is the length of the list minus 1. Lists and
+   Strings share many of the same operators, but include
+   different sets of methods.
+** List Literals and Baisc Operators
+   Literal string values are written as sequences of chara-
+   cters enclosed in quote marks. In Python a list literal
+   is written as a sequence of deta values seperated by
+   commas, and enclosed in square brackets.
+
+   Examples:
+   [1951, 1969, 1984]                  # A list of integers
+   ["apples", "oranges", "cherries"]   # A list of strings
+   []                                  # An empty list
+
+   You can also use other lists as elements in a list,
+   thereby creating a list of lists. Here is one example
+   of such a list:
+
+   [[5, 9], [541, 78 ]]
+
+   When the Python interpreter evaluates a list literal,
+   each of the elements is evaluated as well. When an
+   element is a number or a string, that literal is inc-
+   lutded in the resulting list. However, when the element
+   is a variable or any other expression, its value is
+   included in the list, as shown in the following session.
+
+   >>> import math
+   >>> x = 2
+   >>> [x, math.sqrt(x)]
+   [2, 1.4142135623730941]
+   >>> [x + 1]
+   [3]
+
+   Thus, you can think of the [] delimiters as a function
+   which evaluates its arguments before returning their
+   values.
+*** The range And list Functions
+    You can also build lists of integers using the range
+    and list functions. The next session shows the con-
+    struction of two lists and their assignment:
+
+    >>> first = [1, 2, 3, 4]
+    >>> second = list(range(1,5))
+    >>> first
+    [1, 2, 3, 4]
+    >>> second
+    [1, 2, 3, 4]
+
+    The list function can build a list from any iterable
+    sequence of elements, such as a string:
+
+    >>> third = list("Hello")
+    >>> third
+    ['H', 'e', 'l', 'l', 'o']
+
+    The function len and the subscript operator [] work
+    just as they do for strings:
+
+    >>> len(first)
+    4
+    >>> first[0]
+    1
+    >>> first[2:4]
+    [3, 4]
+
+    Concatenation (+) and Equality (==) also work the same:
+
+    >>> first + [5, 6]
+    >>> first == second
+    True
+
+    The print function strips the quotation marks from a
+    string, but does not alter the list format:
+
+    >>> print("1234")
+    1234
+    >>> print([1, 2, 3, 4])
+    [1, 2, 3, 4]
+
+    To print the contents of a list without the brackets
+    and commas, you can use a for loop:
+
+    >>> for number in [1, 2, 3, 4]:
+            print(number, end = " ")
+    1 2 3 4
+
+    Finally, you can use the in operator to detect the
+    presence or absence of a given element
+
+    >>> 3 in [1, 2, 3, 4]
+    True
+    >>> 0 in [1, 2, 3, 4]
+    False
+** Replacing an Element in a List
+   Although Lists and Strings behave similarly, there is
+   one major difference. A string is immutable--its
+   structure and contents cannot bechanged, while a list
+   is mutable--elements can be inserted, removed, or
+   replaced. The list itself maintains its identity, but
+   its state--its length and its contents--can change.
+
+   The subscript operator is used to replace an element
+   at a given position, as shown in the next session:
+
+   >>> example = [1, 2, 3, 4]
+   >>> example
+   [1, 2, 3, 4]
+   >>> example[3] = 0
+   >>> example
+   [1, 2, 3, 0]
+
+   The subscript operation refers to the target of the
+   assigment statement, which is not the list but an
+   elements position within it. Much of list processing
+   involves replacing each element with the result of
+   applying some operation to that element. Here are two
+   examples of how this is done:
+
+   >>> numbers = [2, 3, 4, 5]
+   >>> numbers
+   [2, 3, 4, 5]
+   >>> for index in range(len(numbers)):
+           numbers[index] = numbers[index] ** 2
+   >>> numbers
+   [4, 9, 16, 25]
+
+   Note that the code uses a for loop over an index rather
+   than a for loop over the list elements, as the index is
+   needed to access the positions for the replacements.
+   The next session uses the string method split to extract
+   a list of words in a sentence. These words are then con-
+   verted to uppercase letters within the list:
+
+   >>> sentence "This example has five words."
+   >>> words = sentence.split()
+   >>> words
+   ['This', 'example', 'has', 'five', 'words.']
+   >>> for index in range(len(words)):
+           words[index] = words[index].upper()
+   >>> words
+   ['THIS', 'EXAMPLE', 'HAS', 'FIVE', 'WORDS.']
+** List Methods for Inserting and Removing Elements
+   The list type includes several methods for inserting and
+   removing elements. They are summarized in the table be-
+   low, where L refers to a list. To learn more about each
+   method, enter *help(list.<method name>)* in a Python
+   shell.
+
+   | *List Method*     | *What It Does*                   |
+   |-------------------+----------------------------------|
+   |-------------------+----------------------------------|
+   | L.append(element) | Adds element to the end of L     |
+   |-------------------+----------------------------------|
+   | L.extend(aList)   | Adds the elements of aList to    |
+   |                   | the end of L                     |
+   |-------------------+----------------------------------|
+   | L.insert(index,   | Inserts element at index if      |
+   | element)          | index is less than the length of |
+   |                   | L. Otherwise, inserts element at |
+   |                   | the end of L.                    |
+   |-------------------+----------------------------------|
+   | L.pop(idex)       | Removes and returns the element  |
+   |                   | at index, or len(L)-1 without a  |
+   |                   | specified index.                 |
+   |-------------------+----------------------------------|
+   | L.pop(index)      | Removes and returns the element  |
+   |                   | at index                         |
+   |-------------------+----------------------------------|
+
+***  Methods
+   The method *insert* expects an integer index and the new
+   element as arguments. When the index is less than the
+   length of the list, insert places the new element before
+   the existing element at said index, after shifting
+   elements to the right by one. Think of it as pushing
+   everything to the right to make room for a new element.
+
+   >>> example = [1, 2]
+   >>> example
+   [1, 2]
+   >>> example.insert(1, 10)    # insert 10 at index 1
+   >>> example
+   [1, 10, 2]
+   >>> example.insert(3, 25)    # insert 25 at index 3
+   >>> example
+   [1, 10, 2, 25]
+
+   The method *append* is a simplified version of *insert*.
+   The method *append* expects just the new element as an
+   argument and adds the new element to the end of the
+   list. The method *extend* performs a similar operation,
+   but adds the elements of a supplied list arguement to
+   the end of the referenced list. The next session shows
+   the differences between append, extend, and the + op.
+
+   >>> example = [1, 2]
+   >>> example.append(3)
+   >>> example
+   [1, 2, 3]
+   >>> example.extend(['a', 'b', 'c'])
+   [1, 2, 3, 'a', 'b', 'c']
+   >>> example + ['!', '?']          
+   [1, 2, 3, 'a', 'b', 'c', '!', '?']
+
+   The method *pop* is used to return and remove an element
+   at a given position. If a position is not specified, pop
+   defaults to the last element. When pop is used, elements
+   that followed the removed element are shifted one pos-
+   ition to the left.
+
+   >>> example
+   [1, 2, 3, 'a', 'b', 'c']
+   >>> example.pop()          # Remove the last element
+   'c'
+   >>> example
+   [1, 2, 3, 'a', 'b']
+   >>> example.pop(0)         # Remove the first element
+   1
+   >>> example
+   [2, 3, 'a', 'b']
+** Searching and Sorting a List
+*** Searching
+    After elements have been added to a list, a program
+    can search for a given element. The *in* operator
+    determines an elements presence or absence, but
+    does not specify its position. Unlike strings, the
+    find method does not work on the list type. Instead of
+    find, you must use the method *index* to locate an
+    elements position in a list. Index raises an exception
+    when the target element is not found. To avoid this,
+    use an *in* if statement before indexing if True.
+
+    aList = [34, 45, 67]
+    target = 45
+    if target in aList:
+        print(aList.index(target))
+    else:
+    print(-1)
+*** Sorting a List
+    Although a list's elements are always ordered by pos-
+    ition, it is possible to impose a *natural ordering*
+    -- the placement of data items relative to each other
+    by some internal criteria, such as numeric value or
+    alphabetical value. -- on them aswell. The list method
+    *sort* mutates a list by arranging its elements in
+    ascending order.
+
+    >>> example = [4, 2, 10, 8]
+    >>> example.sort()
+    >>> example
+    [2, 4, 8 , 10]
+** Mutator Methods and the Value None
+   Mutable objects (such as lists) have some methods
+   devoted entirely to modifying the internal state of
+   the object. Such methods are called *mutators*. Because
+   a change of state is all that is desired, a mutator
+   method usually returns no value of interest to the
+   caller. Python nevertheless automatically returns the
+   special value None even when a method does not explicit-
+   itly return a value.
+
+   Suppose you assume that sort builds and returns a new,
+   sorted list, leaving the original list unsorted. Follow-
+   ing this assumption, code like this would make sense:
+
+   >>> aList = aList.sort()
+
+   Unfortunately, after the list object is sorted, this
+   assignment has the result of setting the variable
+   aList to the value None. The next print statement shows
+   that the reference to the list object is lost:
+
+   >>> print(aList)
+   None
+** Aliasing and Side Effects
+   Because lists are mutable, you can replace, insert, or
+   remove elements. The mutable property of lists leads to
+   some interesting phenomena, as shown here:
+
+   >>> first = [10, 20, 30]
+   >>> second = first
+   >>> first, second
+   ([10, 20, 30], [10, 20, 30])
+   >>> first[1] = 99
+   >>> first, second
+   ([10, 99, 30], [10, 99, 30])
+
+   In this example, a single list object is created and
+   modified using the subscript operator. When the index
+   [1] of the list *first* is replaced, the same index of
+   the list *second* is replaced also. This type of change
+   is known as a *side effect* — a change in a variable that
+   is the result of some action taken in a program, usually
+   from within a method. This happens because after the
+   assigment second = first, the variables first and second
+   refer to the same list object. They are *aliases* — name
+   that refers to the same memory location as another name.
+
+   If the data are immutable strings, aliasing can save on
+   memory. But as you might imagine, aliasing is not always
+   a good thing when side effects are possible. Assigment
+   creates an alias to the same object rather than a refe-
+   rence to a copy of the object. To prevent aliasing, you
+   can create a new object and copy the contents of the
+   original to it, as shown here:
+
+   >>> third = []
+   >>> for element in first:
+           third.append(element)
+   >>> first, third
+   ([10, 99, 30], [10, 99, 30])
+   >>> first[1] = 100
+   >>> first, third
+   ([10, 100, 30], [10, 99, 30])
+
+   The variables first and third refer to two different list
+   objects, although their contents are initially the same,
+   they are not one list with multiple references.
+
+   A simpler way to copy a list is to pass the source to a
+   call of the list function, as follows:
+
+   >>> third = list(first)
+** Equality: Object Identity and Structural Equivalence
+   When attempting to determine whether one variable is an
+   alias for another, the == operator can be used. It returns
+   True if the variables are aliases for the same object.
+   Unfortunately, == also returns True if the contents of two
+   /different/ objects are the same.
+
+   The first relation is called *object identity* —property of
+   an object that makes it possible for it to be the same at
+   different points in time, even though the values of its
+   attributes might change.
+   The second is *structural equivalence* — a criterion of
+   equality between two distinct objects in which one or more
+   of their attributes are equal.
+
+   Pythons is operator can be used to test for object identity,
+   it returns True if two operands refer to the exact same
+   object, or False if the operands are distinct objects.
+
+   >>> first = [1, 2, 3]
+   >>> second = first
+   >>> third = list(first)
+   >>> first == second
+   True
+   >>> first == third
+   True
+   >>> first is second
+   True
+   >>> first is third
+   False
+** Tuples
+   A *tuple* is a type of sequence that resembles a list,
+   except that, unlike a list, a tuple is immutable. You
+   indicate a tuple literal in Python by enclosing its
+   elements in parenthesis instead of square brackets.
+
+   >>> fruits ("apple", "banana")
+   >>> fruits
+   ('apple', 'banana')
+   >>> meats = ("fish", "poultry")
+   >>> food = meats + fruits
+   >>> food
+   ('fish', 'poultry', 'apple', 'banana')
+   >>> veggies = ["celery", "beans"]
+   >>> tuple(veggies)
+   ('celery', 'beans')
+
+   Most operators and functions that are used with lists also
+   apply to tuples. For the most part, if you foresee a list
+   whose structure will not change, you can and should use a
+   tuple instead.
+
+   When using a tuple of one element, you place a comma after
+   the expression within the parenthesis.
+
+   >>> badSingleton = (3)
+   >>> badSingleton
+   3
+   >>> goodSingleton = (3,)
+   >>> goodSingleton
+   (3,)

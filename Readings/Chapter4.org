@@ -1,0 +1,227 @@
+* 4-1 Accessing Characters and Substrings in Strings
+  In this section, we examine the internal structure of a string
+  more closely, and learn how to extract portions of a string called
+  substrings.
+** The Structure of Strings
+   a string is a *data structure* - a compound unit that consists of
+   several other pieces of data. A string is a sequence of zero or
+   more characters.
+   
+   Although there is no difference between single
+   and double quote strings, common practice is to use single quotes
+   with single-character strings, and double quotes with the empty
+   string or multi-character strings.
+   
+   When working with strings, one should be aware of the strings
+   length and the positions of the individual characters within the
+   string. A string's length is the number of characters it contains.
+   Python's *len* functions returns this value when it is passed a
+   string. The positions of a string's characters are numbered from
+   0, on the left, to the length minus 1, on the right.
+   
+   For example:
+   >>> len("Hello!") # len is passed the string "Hello!"
+   6                 # the length of said string is returned
+                       an integer value
+** The Subscript Operator
+   Although a simple for loop can access any of the characters in
+   a string, sometimes you just want to inspect one character at
+   a given position without visiting them all. This is made possible
+   by the *subscript operator []*.
+
+   The simplest form of the subscript operation:
+   <a string>[<an integer expression>]
+
+   The first part of this operation is the string you want to inspect.
+   The integer expression indicates the position (of 0 to length-1)
+   of a particular character in that string. This is also known as the
+   *index* - "The relative position of a component of a linear data 
+   structure or collection."
+
+   Python also allows negative subscript values to access characters at
+   or near the end of a string. Counting backwards from -1 accesses
+   characters from the right end of the string to the left.
+** Slicing for Substrings
+   Pythons subscript operator can be used to obtain a substring
+   through a process called *slicing* - "An operation that returns
+   a subsection of a linear collection". To return a substring from
+   the subscript operator, a colon is used to denote a range of values.
+   
+   Subscript operator for slicing:
+   <a string>[<first position>:<second position - 1>]
+
+   Example:
+   >>> name = "myfile.txt"   # the string
+   >>> name[0:1]             # return characters 0 to 1
+   'm'
+   >>> name[2:6]             # return characters 2 to 6
+   'file'
+   >> name[-3:]              # return last 3 characters
+
+   As seen in the last subexample, providing no value after the colon
+   returns from the first value to the end of the string.
+** Testing for a Substring with the in Operator
+   When searching for a known substring in a string, like for the ".txt"
+   extention in a text file, it is best to use the Python operator *in*.
+   When used with strings, the left operand of /in/ is a target substring,
+   and the right operand is the string to be searched. The operator in
+   returns True if the target substring is in the string, and False if it
+   is not.
+
+   in operator:
+   <substring to find> in <string>
+
+   example:
+   >>> "Hello" in "Hello World!"
+   True
+   >>> "White" in "Red Blue Green"
+   False
+
+   The in operator can be combined with a for loop to run through
+   strings and sort them for a known substring:
+
+   >> fileList = ["file.txt", "program.exe", "journal.txt"]
+   >> for fileName in fileList:
+          if ".text" in fileName:
+	      print(fileName)
+      file.text
+      journal.text
+      
+* 4-2 Data Encryption
+** Encryption Basics  
+  As data trasmitted across the internet gets more and more vulnerable
+  to observation through things like *sniffing software*- "programs
+  that allow the user to spy on data transmissions over a network.",
+  most applications now use *data encryption* to protect information
+  transmitted on networks. Examples of such are FTPS, and HTTPS, which
+  are secure versions of FTP and HTTP for file transfer and Web page
+  transfer, respectively.
+
+  During encryption, the sender *encrypts* a message by translating it
+  to a secret code,called a *cipher text*. At the other end, the
+  reciever *decrypts* the cipher text back to its original *plaintext*,
+  which is its source unencrypted form.
+*** Ceaser Cipher
+    "An encryption method that replaces characters with other characters 
+    a given distance away in the character set."
+    
+    For positive distances, the method wraps around to the beginning of
+    the sequence to locate the replacement characters for those characters
+    near its end.
+
+    Ceaser cipher example with distance +3:
+    Ascii
+    97 98 99 100 101
+    a  b  c  d   e
+
+    Cipher Text
+    100 101 102 103 104
+    d   e   f   g   h
+* 4-5 Text Files
+  A text file is a software object that stores data on a permanent medium
+  such as a disk, CD, or flash memory. When compared to keyboard input
+  from a human user, the main advantages of input from a file are
+  the following:
+  - The data set can be much larger.
+  - The data can be input much more quickly and
+    with less chance of error
+  - The data can be used repeatedly
+** Text Files and Their Format
+   Using a text editor such as Notepad or Emacs, you can create, view,
+   and save data in a teaxt file. Python programs can also output data
+   to a text file, which will be covered further on.
+
+   Data stored in a text file can be viewed as characters, words,
+   numbers, or lines of text, depending on the text file's format and
+   on the purpose of the data. When dealing with numerical data, each
+   number must be seperated by whitespace-spaces, tabs, and newlines-
+   in the file.
+
+   All data output to or input from a text file must be strings. Thus,
+   numbers must be converted to strings before output, and these strings
+   must be converted back to numbers after input.
+
+   
+** Writing Text to a File
+   Data from Python can be output to a text file using a file object.
+   Pythons *open* function, which expects a file name and a *mode
+   string*
+   - A string argument, such as 'r' for input or 'w' for output, that
+     indicates the method.
+
+   Example:
+   >>> f = open("file.txt", 'w')
+
+   If the file does not exist, it is created with the given
+   filename. If the file does exist, Python opens it. When an existing
+   file is opened for output, the data already in it is erased.
+
+   String data are written (output) to a file using the method *write*
+   , with the file object. The write method expects a single string
+   argument. If you want the text output to the file to end with a
+   newline, you must use the escape character '\n' in the string.
+   
+   Writing two lines of text to the file:
+   >>> f.write("First line.\nSecond line.\n")
+
+   When all of the outputs are finished, the file should be closed
+   using the method *close*, as follows:
+   >>> f.close()
+
+   Failure to close an output file can result in data being lost. The
+   reason for this is that many systems accumulate data files in a
+   *buffer* - An area of computer memory used to transmit data to and
+   from external storage. - before storing them. The close operation
+   guarantees that data in the final chunk are output sucessfully.
+   
+   
+** Writing Numbers to a File
+   The file method write expects strings as an argument. Therefore,
+   other types of data, such as integers or floats must first be
+   converted to strings before being written. In Python, the values
+   of most data types can be converted to strings using *str*. The
+   resulting strings are then written to a file with a space or
+   newline seperator.
+
+   
+** Reading Text from a File
+   Much like using the *open* operator with the 'w' argument, it can
+   also be used with the 'r' operator, for read or input. The simplest
+   method to read data from a file opened this way is through the *read*
+   method. This method dumps the attatched file as a single string,
+   including newline arguments if there are multiple lines of text.
+
+   >>> f = open("myfile.txt", 'r')
+   
+   If you wish to read an opened file one line at a time, a for loop
+   accomplishes this with the right syntax. The for loop views a file
+   object as a sequence of lines of text. On each pass through the loop,
+   the loop variable is bound to the next line of text in the sequence.
+
+   for loop text file dump example:
+   >>> f = f.read()
+   >>> for line in f:
+            print(line)
+       First line.
+
+       Second line.
+
+   Note that print appears to print an extra newline. This is caused
+   by each line of the input file retaining its newline character.
+
+   In cases where one wants a specified number of lines read from a
+   file, the *readline* method is effective. The readline method
+   consumes a line of input and returns the string, including the
+   newline. If readline encounters the end of the file, it returns
+   an empty string.
+
+   While loop to dump all lines of a file:
+   >>> f = open("myfile.txt", 'r')
+   >>> while True:
+           line = f.readline()
+	   if line == "":
+	       break
+	   print(line)
+       First line.
+
+       Second line.
